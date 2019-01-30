@@ -1,4 +1,4 @@
-var topics = ["Hunter x Hunter", "Cooking", "Dragonball FighterZ", "Zach Hill", "Metal Gear Solid", "Seinfield", "Yojimbo", "Spaghetti Western", "Dark Souls", "Super Smash Brothers: Melee"];
+var topics = ["Hunter x Hunter", "Tom Waits", "Dragonball Z", "Hideo Kojima", "Metal Gear Solid", "Seinfield", "Yojimbo", "Spaghetti Western", "Dark Souls", "Super Smash Brothers: Melee"];
 var newBtnAmount = 0;
 
 window.onload = function(){
@@ -15,7 +15,25 @@ window.onload = function(){
 
 };
 
+$(document).ready(function(){
 
+    $("#gifs").on("click", "img", function stateToggler(){
+        var state = $(this).attr("data-state");
+        if(state === "still"){
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+        }
+
+        else if(state === "animate"){
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        }
+
+        return
+
+
+    });
+});
 
 $(document).ready(function(){
 
@@ -46,7 +64,10 @@ $(".buttons").on("click", ".btn", function(event){
 
            let newGif = $("<img>");
            
-           newGif.attr("src", results[i].images.original.url);
+           newGif.attr("src", results[i].images.original_still.url);
+           newGif.attr("data-animate", results[i].images.original.url);
+           newGif.attr("data-still", results[i].images.original_still.url);
+           newGif.attr("data-state", "animate");
 
            newDiv.prepend(p);
            newDiv.prepend(newGif);
@@ -58,7 +79,6 @@ $(".buttons").on("click", ".btn", function(event){
 
     });
 });
-
 
 
 
